@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:network_image_to_byte/network_image_to_byte.dart';
-import 'dart:io';
 import 'dart:typed_data';
-import 'package:http/http.dart' as http;
-
 import 'package:screenshot/screenshot.dart';
 // import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as ui;
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class EditTemplate2 extends StatefulWidget {
   const EditTemplate2(this.image);
@@ -23,6 +19,14 @@ class _EditTemplate2State extends State<EditTemplate2> {
   String venue = "";
   String desc = "";
   String date = "";
+  String fam = "";
+
+  Color pickerColor = Color(0xff443a49);
+  Color currentColor = Color(0xff443a49);
+  void changeColor(Color color) {
+    setState(() => pickerColor = color);
+  }
+
 
     @override
   Widget build(BuildContext context) {
@@ -56,9 +60,10 @@ class _EditTemplate2State extends State<EditTemplate2> {
                                   title,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color:  currentColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 26,
+                                      fontFamily: fam
                                     ),
                                 
                             // )
@@ -71,9 +76,10 @@ class _EditTemplate2State extends State<EditTemplate2> {
                                   desc,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: currentColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 26,
+                                      fontFamily: fam
                                     ),
                                 
                             // )
@@ -86,9 +92,10 @@ class _EditTemplate2State extends State<EditTemplate2> {
                               venue,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: currentColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 26,
+                                      fontFamily: fam
                                     ),
                                 
                             // )
@@ -101,9 +108,10 @@ class _EditTemplate2State extends State<EditTemplate2> {
                               date,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color:currentColor ,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 26,
+                                      fontFamily: fam
                                     
                                     ),
                                 
@@ -114,13 +122,75 @@ class _EditTemplate2State extends State<EditTemplate2> {
                     ],
                   )
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center ,
+              children: [
+                TextButton(
+                  child: Text('Choose color: '),
+                  onPressed: (){
+                                    
+                  showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                      return AlertDialog(
+                    title: const Text('Pick a color!'),
+                    content: SingleChildScrollView(
+                      child: ColorPicker(
+                        pickerColor: pickerColor,
+                        onColorChanged: changeColor,
+                        showLabel: true,
+                        pickerAreaHeightPercent: 0.8,
+                      ),
+                      ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('Got it'),
+                        onPressed: () {
+                          setState(() => currentColor = pickerColor);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                      );
+                      }
+                  );
+                  }
+                ),
+                Container(
+                  height: 50.0,
+                  child: Text('     '),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color:  currentColor,
+                  )
+
+                  ),
+                DropdownButton<String>(
+                  items: <String>['Acme', 'Faustina'].map((String value) {
+                    return new DropdownMenuItem<String>(
+                      value: value,
+                      child: new Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String f) {
+                    setState(()=>fam = f);
+                  },)
+              ],
+            ),
             TextField(
               onChanged: (val) {
                setState(() {
                 desc = val;
                 });
               },
-              decoration: InputDecoration(hintText: "Enter Title"),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                  color: Colors.blue,
+                ),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+                hintText: "Enter Title"),
             ),
             SizedBox(
               height: 12,
@@ -146,7 +216,8 @@ class _EditTemplate2State extends State<EditTemplate2> {
             ),
             SizedBox(
               height: 12,
-            ),TextField(
+            ),
+            TextField(
               onChanged: (val) {
                setState(() {
                 title = val;
