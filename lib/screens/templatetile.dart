@@ -17,22 +17,15 @@ class _TileState extends State<Tile> {
     return GestureDetector(
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> EditTemplate2(widget.source))),
       child: Card(
-        child:Column(
-          children: <Widget>[
-            Image.network(widget.source),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child:Column(
-                children: <Widget>[
-                  Text(
-                    'Image number ${widget.index}',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+        shape: RoundedRectangleBorder(  
+            borderRadius: BorderRadius.circular(25.0),  
+          ), 
+        elevation: 10.0,
+        child:ClipRRect(
+          borderRadius: BorderRadius.circular(25.0),
+          child: Image.network(widget.source,
+          // fit: BoxFit.fill,
+        ),)
       ),
     );
   }

@@ -4,6 +4,8 @@ import 'package:screenshot/screenshot.dart';
 // import 'package:image_picker/image_picker.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+
 class EditTemplate2 extends StatefulWidget {
   const EditTemplate2(this.image);
   final String image;
@@ -19,7 +21,7 @@ class _EditTemplate2State extends State<EditTemplate2> {
   String venue = "";
   String desc = "";
   String date = "";
-  String fam = "";
+  String fam = "Acme";
 
   Color pickerColor = Color(0xff443a49);
   Color currentColor = Color(0xff443a49);
@@ -34,7 +36,11 @@ class _EditTemplate2State extends State<EditTemplate2> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Template'),
+        title: Text('Edit Template',
+        style: TextStyle(
+          fontFamily: 'Acme'
+        ),
+        ),
       ),
       body: SingleChildScrollView(
               child: Column(
@@ -107,15 +113,16 @@ class _EditTemplate2State extends State<EditTemplate2> {
                             Text(
                               date,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style:  GoogleFonts.lato(
+                                    textStyle:TextStyle(
                                       color:currentColor ,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 26,
-                                      fontFamily: fam
+                                      // fontFamily: 'Faustina'
                                     
                                     ),
                                 
-                            // )
+                            )
                             ),
                         ],
                       )
@@ -126,7 +133,10 @@ class _EditTemplate2State extends State<EditTemplate2> {
               mainAxisAlignment: MainAxisAlignment.center ,
               children: [
                 TextButton(
-                  child: Text('Choose color: '),
+                  child: Text('Choose color: ',
+        style: TextStyle(
+          fontFamily: 'Acme'
+        ),),
                   onPressed: (){
                                     
                   showDialog(
@@ -166,14 +176,21 @@ class _EditTemplate2State extends State<EditTemplate2> {
 
                   ),
                 DropdownButton<String>(
+                
+                  hint: Text('Choose font style'), 
+                   value: fam,
                   items: <String>['Acme', 'Faustina'].map((String value) {
                     return new DropdownMenuItem<String>(
                       value: value,
                       child: new Text(value),
+                      
                     );
                   }).toList(),
                   onChanged: (String f) {
-                    setState(()=>fam = f);
+                    setState((){
+                      fam = f;
+                    });
+                    print(fam);
                   },)
               ],
             ),
