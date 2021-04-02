@@ -33,15 +33,6 @@ class _TemplatesState extends State<Templates> {
           Tile(
               'https://i.pinimg.com/236x/80/f8/ac/80f8ac9143e66743e3828556c16ac309.jpg',
               5),
-          // Tile(
-          //     'https://cdn.pixabay.com/photo/2013/04/13/18/42/the-eiffel-tower-103417_960_720.jpg',
-          //     6),
-          // Tile(
-          //     'https://cdn.pixabay.com/photo/2017/08/24/22/37/gyrfalcon-2678684_960_720.jpg',
-          //     7),
-          // Tile(
-          //     'https://cdn.pixabay.com/photo/2013/01/17/08/25/sunset-75159_960_720.jpg',
-          //     8),
         ],
         staggeredTiles: const <StaggeredTile>[
           const StaggeredTile.fit(2),
@@ -49,9 +40,6 @@ class _TemplatesState extends State<Templates> {
           const StaggeredTile.fit(2),
           const StaggeredTile.fit(2),
           const StaggeredTile.fit(2),
-          // const StaggeredTile.fit(1),
-          // const StaggeredTile.fit(2),
-          // const StaggeredTile.fit(2),
         ],
       ),
       ),
