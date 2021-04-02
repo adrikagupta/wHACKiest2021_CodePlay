@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'editTemplate.dart';
 class Tile extends StatefulWidget {
   const Tile(this.source, this.index);
 
@@ -13,22 +13,25 @@ class Tile extends StatefulWidget {
 class _TileState extends State<Tile> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child:Column(
-        children: <Widget>[
-          Image.network(widget.source),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child:Column(
-              children: <Widget>[
-                Text(
-                  'Image number ${widget.index}',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          )
-        ],
+    return GestureDetector(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> EditTemplate(widget.source))),
+      child: Card(
+        child:Column(
+          children: <Widget>[
+            Image.network(widget.source),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child:Column(
+                children: <Widget>[
+                  Text(
+                    'Image number ${widget.index}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
