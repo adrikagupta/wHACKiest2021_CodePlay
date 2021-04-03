@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/templates.dart';
+import 'screens/invitscreen.dart';
 void main() {
   runApp(MyApp());
 }
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Templates(),
+      home: DashboardPage(),
     );
   }
 }

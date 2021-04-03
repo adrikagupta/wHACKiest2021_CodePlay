@@ -96,7 +96,7 @@ class _EditTemplate2State extends State<EditTemplate2> {
                         }
                         ),
                          GestureDetector(child: IconCard(icon: Icons.font_download),
-                         onTap: //TODO: add dont function
+                         //onTap: //TODO: add font function
                          )
                       ],
                     // ),
