@@ -1,3 +1,5 @@
+// import 'package:book_my_hall/screens/catering_list.dart';
+import 'package:book_my_hall/screens/catering_main_page.dart';
 import 'package:flutter/material.dart';
 import 'models/halls.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

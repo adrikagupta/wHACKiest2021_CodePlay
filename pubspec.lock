@@ -26,6 +26,10 @@ packages:
     dependency: "direct main"
     description:
       name: cached_network_image
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
@@ -116,6 +120,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_fonts:
+    dependency: "direct main"
+    description:
+      name: google_fonts
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   http:
     dependency: transitive
     description:
@@ -352,13 +363,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
-  xml:
-    dependency: transitive
-    description:
-      name: xml
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.2"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.24.0-10.2.pre"
+  flutter: ">=1.20.0"
