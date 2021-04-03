@@ -1,6 +1,7 @@
 import 'package:book_my_hall/screens/catering_main_page.dart';
 import 'package:book_my_hall/screens/hall_list.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'invitscreen.dart';
 
 class HallMainPage extends StatelessWidget {
@@ -18,6 +19,12 @@ class HallMainPage extends StatelessWidget {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => DashboardPage()));
   }
+  String _url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  void _launchURL() async {
+    print('Hi');
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
+    }
+    
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -73,6 +80,12 @@ class HallMainPage extends StatelessWidget {
                                     goToInvitationPage(context);
                                   },
                                   child: Icon(Icons.menu_book_rounded,
+                                      size: 42, color: Colors.white.withOpacity(0.8))),
+                            ),
+                            PopupMenuItem(
+                              child: GestureDetector(
+                                  onTap:_launchURL, 
+                                  child: Icon(Icons.emoji_emotions_rounded,
                                       size: 42, color: Colors.white.withOpacity(0.8))),
                             )
                           ],
