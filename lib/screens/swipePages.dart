@@ -1,16 +1,13 @@
 import 'dart:async';
 
 import 'package:book_my_hall/screens/hall_main_page.dart';
-import 'package:book_my_hall/screens/invitscreen.dart';
 import 'package:flutter/material.dart';
 import '../models/slide.dart';
-import '../main.dart';
 import '../widgets/slideDot.dart';
 import '../widgets/slideItem.dart';
 import 'hall_main_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// import 'package:url_launcher/url_launcher.dart';
 class SwipePages extends StatefulWidget {
   @override
   _SwipePagesState createState() => _SwipePagesState();
@@ -49,11 +46,11 @@ class _SwipePagesState extends State<SwipePages> {
       _currentPage = index;
     });
   }
-  // String _url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-  // void _launchURL() async {
-  //   print('Hi');
-  //   await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
-  //   }
+  String _url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  void _launchURL() async {
+    print('Hi');
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +107,7 @@ class _SwipePagesState extends State<SwipePages> {
                     Container(
                       width: width,
                       child: FlatButton(
-                        onLongPress: (){print("launchURL");},
+                        onLongPress: _launchURL,
                         child: Text(
                           'Getting Started',
                           style: TextStyle(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'editTemplate.dart';
 import 'editTemplate2.dart';
 class Tile extends StatefulWidget {
   const Tile(this.source);

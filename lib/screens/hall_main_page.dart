@@ -25,9 +25,7 @@ class HallMainPage extends StatelessWidget {
     print('Hi');
     await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
     }
-    
-    Navigator.push(context, MaterialPageRoute(builder: (context)=> DashboardPage()));
-  }
+   
 @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

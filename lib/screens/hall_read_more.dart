@@ -2,12 +2,13 @@ import 'package:book_my_hall/screens/rules_screen.dart';
 import 'package:book_my_hall/utilities/textStyles.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import "package:flutter/material.dart";
-// import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/booking.dart';
 import 'rules_screen.dart';
 
 const url = "https://download1519.mediafire.com/yrb14z8r6gxg/1j4aifyjljd3pwt/covid-Wedding.pdf";
+
+const url2 = "https://www.amazon.in/s?k=masks+and+sanitizers&crid=3L0U6Y2P86YMC&sprefix=Masks+amd+sa%2Caps%2C356&ref=nb_sb_ss_sc_1_12";
 
 class HallReadMore extends StatefulWidget {
   final String name;
@@ -60,9 +61,13 @@ Widget buildImage(String image) {
     ));
   }
 
-  // void dcPermissionLetter() async{
-  //   await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
-  // }
+  void dcPermissionLetter() async{
+    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+  }
+
+  void amazonMask() async{
+    await canLaunch(url2) ? await launch(url2) : throw 'Could not launch $url2';
+  }
 
   void popUp(BuildContext ctx){
     showModalBottomSheet(
@@ -151,27 +156,30 @@ Widget buildImage(String image) {
                       ),
                     ),
                     
-                    Container(
-                       width : width*0.45,
-                      margin: EdgeInsets.fromLTRB(0, 0, 12, 10),
-                      padding: EdgeInsets.symmetric(horizontal:10,vertical:10),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color:Colors.green,width:2)
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.medical_services_outlined,size:35,color:Colors.green),
-                          SizedBox(width:5),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Covid Ready?",style:caterer_read_more_content_black_tiny),
-                              SizedBox(height:3),
-                              Text("Yes",style:caterer_read_more_content_black_tiny)
-                            ]
-                          ),
-                        ]
+                    GestureDetector(
+                          onDoubleTap: amazonMask,
+                          child: Container(
+                         width : width*0.45,
+                        margin: EdgeInsets.fromLTRB(0, 0, 12, 10),
+                        padding: EdgeInsets.symmetric(horizontal:10,vertical:10),
+                        decoration:BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color:Colors.green,width:2)
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.medical_services_outlined,size:35,color:Colors.green),
+                            SizedBox(width:5),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Covid Ready?",style:caterer_read_more_content_black_tiny),
+                                SizedBox(height:3),
+                                Text("Yes",style:caterer_read_more_content_black_tiny)
+                              ]
+                            ),
+                          ]
+                        ),
                       ),
                     ),
                   ]
@@ -198,7 +206,7 @@ Widget buildImage(String image) {
                       Icon(Icons.arrow_downward_rounded,size:25,color:Colors.blue),
                       SizedBox(width:5),
                       GestureDetector(
-                        onTap: (){print("dc tapped");},
+                        onTap: dcPermissionLetter,
                         child: Text("Download DC Permission Letter" ,style: hall_read_more_link),
                       ),
                     ],
