@@ -6,8 +6,8 @@ List<Widget> wedding = [
   Tile('https://i.pinimg.com/564x/cb/6f/1e/cb6f1e7b0ced6ddd8c99f2bb051b726e.jpg'),
   Tile('https://image.freepik.com/free-psd/botanical-framed-card_53876-91331.jpg'),
   Tile('https://i.pinimg.com/236x/e5/d1/76/e5d1765cc10fa2fdc642bf37a706ac06.jpg'),
-  Tile('https://i.pinimg.com/236x/64/36/86/64368687e08fecee34fab038a2aec098.jpg'),
   Tile('https://i.pinimg.com/236x/ea/2f/a0/ea2fa0a65a40ea2432294096c9f8c8d2.jpg'),
+  Tile('https://i.pinimg.com/236x/1e/58/85/1e5885503f834a4c64bcdd8aff8371f4.jpg'),
 ];
 
 List<Widget> birthday = [
