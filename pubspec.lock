@@ -26,6 +26,12 @@ packages:
     dependency: "direct main"
     description:
       name: cached_network_image
+    source: hosted
+    version: "3.0.0"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
@@ -97,6 +103,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_admin_scaffold:
+    dependency: "direct main"
+    description:
+      name: flutter_admin_scaffold
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -121,6 +134,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_fonts:
+    dependency: "direct main"
+    description:
+      name: google_fonts
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   http:
     dependency: transitive
     description:
