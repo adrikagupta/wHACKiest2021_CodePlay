@@ -18,7 +18,7 @@ class _TemplatesState extends State<Templates> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF222222),
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 150.0,
         // leading: IconButton(
