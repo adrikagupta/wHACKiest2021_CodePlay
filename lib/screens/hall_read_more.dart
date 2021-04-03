@@ -2,7 +2,8 @@ import 'package:book_my_hall/screens/rules_screen.dart';
 import 'package:book_my_hall/utilities/textStyles.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import "package:flutter/material.dart";
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import '../models/booking.dart';
 import 'rules_screen.dart';
 
@@ -26,6 +27,18 @@ class _HallReadMoreState extends State<HallReadMore> {
   "assets/images/hall_12.jpg",
 ];
 
+void onSubmit(){
+//   Fluttertoast.showToast(
+//         msg: "Form Submitted",
+//         toastLength: Toast.LENGTH_LONG,
+//         gravity: ToastGravity.CENTER,
+//         timeInSecForIosWeb: 1,
+//         backgroundColor: Colors.green[300],
+//         textColor: Colors.white,
+//         fontSize: 14.0
+// );
+}
+
 Widget buildImage(String image) {
     return Container(
       margin: EdgeInsets.all(2.0),
@@ -47,9 +60,9 @@ Widget buildImage(String image) {
     ));
   }
 
-  void dcPermissionLetter() async{
-    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
-  }
+  // void dcPermissionLetter() async{
+  //   await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+  // }
 
   void popUp(BuildContext ctx){
     showModalBottomSheet(
@@ -185,7 +198,7 @@ Widget buildImage(String image) {
                       Icon(Icons.arrow_downward_rounded,size:25,color:Colors.blue),
                       SizedBox(width:5),
                       GestureDetector(
-                        onTap: dcPermissionLetter,
+                        onTap: (){print("dc tapped");},
                         child: Text("Download DC Permission Letter" ,style: hall_read_more_link),
                       ),
                     ],
@@ -270,7 +283,7 @@ Widget buildImage(String image) {
                     SizedBox(height: 20),
                     Center(
                   child: GestureDetector(
-                    onTap: (){},
+                    onTap: (){onSubmit();},
                     child: Container(
                       padding:EdgeInsets.symmetric(horizontal:30,vertical:10),
                       margin: EdgeInsets.only(top:20),

@@ -49,7 +49,7 @@ class _BookingState extends State<Booking> {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsets.all(6.0),
+        padding: EdgeInsets.symmetric(horizontal:15,vertical:15,),
         child: Form(
           key: form,
           child: ListView(
@@ -101,7 +101,7 @@ class _BookingState extends State<Booking> {
               TextButton(
                   onPressed: startDatePicker,
                   child:
-                      Text('Pick start date', style: TextStyle(fontSize: 20))),
+                      Text('Pick start date', style: TextStyle(fontSize: 20, color:Colors.indigo[900], decoration: TextDecoration.underline))),
               Center(
                 child: Text(
                     startDate == null
@@ -111,16 +111,24 @@ class _BookingState extends State<Booking> {
               ),
               TextButton(
                   onPressed: endDatePicker,
-                  child: Text('Pick end date', style: TextStyle(fontSize: 20))),
+                  child: Text('Pick end date', style: TextStyle(fontSize: 20, color:Colors.indigo[900], decoration: TextDecoration.underline))),
               Center(
                   child: Text(
                       endDate == null
                           ? 'No end date chosen'
                           : 'end date: ${endDate.day}-${endDate.month}-${endDate.year}',
                       style: TextStyle(fontSize: 20))),
-              ElevatedButton(
-                onPressed: saveForm,
-                child: Text('Book now'),
+              GestureDetector(
+                onTap: saveForm,
+                child: Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top:20,bottom:10),
+                  padding: EdgeInsets.symmetric(vertical:10),
+                  decoration: BoxDecoration(
+                    color: Colors.indigo,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Center(child: Text('Book now',style: TextStyle(fontSize: 20,color:Colors.white)))),
               ),
             ],
           ),

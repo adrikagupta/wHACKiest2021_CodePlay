@@ -9,7 +9,7 @@ class CateringMainPage extends StatefulWidget {
 class _CateringMainPageState extends State<CateringMainPage> {
   TextEditingController cityController = TextEditingController();
   void searchByCity(){
-    Navigator.of(context).push(createRoute());
+    Navigator.of(context).push(createRoute(cityController.text));
   }
   @override
   Widget build(BuildContext context) {
@@ -54,17 +54,17 @@ class _CateringMainPageState extends State<CateringMainPage> {
                   ),
                   child: Row(
                     children:[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                          child: IconButton(
-                            icon: Icon(Icons.location_searching, color:Colors.white),
-                            onPressed: (){
-                              print("locator pressed");
-                            }
-                          ),
-                      ),
+                      // Container(
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(15),
+                      //   ),
+                      //     child: IconButton(
+                      //       icon: Icon(Icons.location_searching, color:Colors.white),
+                      //       onPressed: (){
+                      //         print("locator pressed");
+                      //       }
+                      //     ),
+                      // ),
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -100,9 +100,9 @@ class _CateringMainPageState extends State<CateringMainPage> {
   }
 }
 
-Route createRoute() {
+Route createRoute(String text) {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => CateringList(),
+    pageBuilder: (context, animation, secondaryAnimation) => CateringList(text:text),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       var begin = Offset(0.0, 1.0);
       var end = Offset.zero;

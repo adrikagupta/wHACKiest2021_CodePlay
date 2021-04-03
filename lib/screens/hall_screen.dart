@@ -1,7 +1,7 @@
 import 'package:book_my_hall/models/booking.dart';
 import 'package:book_my_hall/screens/rules_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import 'package:book_my_hall/models/halls.dart';
 
 const url = "https://download1519.mediafire.com/yrb14z8r6gxg/1j4aifyjljd3pwt/covid-Wedding.pdf";
@@ -33,8 +33,8 @@ class _HallScreenState extends State<HallScreen> {
     ));
   }
 
-  void launchURL() async =>
-    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+  // void launchURL() async =>
+  //   await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _HallScreenState extends State<HallScreen> {
             Padding(padding: EdgeInsets.all(20.0),
                     child:TextButton(
                       child: Text('Download DC Permsission Letter'),
-                      onPressed:launchURL,
+                      onPressed:(){},
                     )),
             Padding(padding: EdgeInsets.all(20.0),
                     child:ElevatedButton(
