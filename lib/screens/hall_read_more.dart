@@ -1,19 +1,29 @@
+import 'package:book_my_hall/screens/rules_screen.dart';
 import 'package:book_my_hall/utilities/textStyles.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import "package:flutter/material.dart";
+import 'package:url_launcher/url_launcher.dart';
 
-class HallReadMore extends StatelessWidget {
+const url = "https://download1519.mediafire.com/yrb14z8r6gxg/1j4aifyjljd3pwt/covid-Wedding.pdf";
+
+class HallReadMore extends StatefulWidget {
   final String name;
   final String size;
 
   HallReadMore({Key key, this.name, this.size}) : super(key: key);
 
+  @override
+  _HallReadMoreState createState() => _HallReadMoreState();
+}
+
+class _HallReadMoreState extends State<HallReadMore> {
   final List<String> images = [
   "assets/images/hall_13.jpg",
   "assets/images/hall_14.jpg",
   "assets/images/hall_11.jpg",
   "assets/images/hall_12.jpg",
 ];
+
 Widget buildImage(String image) {
     return Container(
       margin: EdgeInsets.all(2.0),
@@ -26,12 +36,18 @@ Widget buildImage(String image) {
       ),
     );
   }
-  void rulesAndRegualtions(){
+
+  void rulesAndRegualtions(BuildContext context){
     //TODO: write code for rules and regulations
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_){
+        return RuleScreen();
+      }
+    ));
   }
-  void dcPermissionLetter(){
-    //TODO: write code for dc permission letter
-  }
+
+  void launchURL() async =>
+    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 
  @override
   Widget build(BuildContext context) {
@@ -78,7 +94,7 @@ Widget buildImage(String image) {
                       children: [
                         Text("About", style: caterer_read_more_title_black),
                         Text(
-                            "$name will make your dream come true. Offering a couple of lawns adorned in lush greenery and a stunning banquet, the luxurious venue makes for the most perfect setting for weddings, receptions, and pre-wedding ceremonies, along with anniversary functions, promotion parties, product launches, fundraisers, galas, award functions, and more. We will provide you a wedding ceremony that leaves everyone spellbound.",
+                            "${widget.name} will make your dream come true. Offering a couple of lawns adorned in lush greenery and a stunning banquet, the luxurious venue makes for the most perfect setting for weddings, receptions, and pre-wedding ceremonies, along with anniversary functions, promotion parties, product launches, fundraisers, galas, award functions, and more. We will provide you a wedding ceremony that leaves everyone spellbound.",
                             style: caterer_read_more_content_black)
                       ],
                     ),
@@ -105,7 +121,7 @@ Widget buildImage(String image) {
                             children: [
                               Text("Size",style:caterer_read_more_content_black_tiny),
                               SizedBox(height:3),
-                              Text(size,style:caterer_read_more_content_black_tiny)
+                              Text(widget.size,style:caterer_read_more_content_black_tiny)
                             ]
                           ),
                         ]
@@ -145,7 +161,7 @@ Widget buildImage(String image) {
                       Icon(Icons.list_alt_rounded,size:25,color:Colors.blue),
                       SizedBox(width:5),
                       GestureDetector(
-                        onTap: (){rulesAndRegualtions();},
+                        onTap: (){rulesAndRegualtions(context);},
                         child: Text("Rules and Regulations", style: hall_read_more_link),
                       ),
                     ],
@@ -159,7 +175,7 @@ Widget buildImage(String image) {
                       Icon(Icons.arrow_downward_rounded,size:25,color:Colors.blue),
                       SizedBox(width:5),
                       GestureDetector(
-                        onTap: (){dcPermissionLetter();},
+                        onTap: launchURL,
                         child: Text("Download DC Permission Letter" ,style: hall_read_more_link),
                       ),
                     ],
@@ -283,4 +299,4 @@ Widget buildImage(String image) {
       ),
     );
   }
- }
+}
