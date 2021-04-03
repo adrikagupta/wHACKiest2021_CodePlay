@@ -3,6 +3,8 @@ import 'package:book_my_hall/utilities/textStyles.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import "package:flutter/material.dart";
 import 'package:url_launcher/url_launcher.dart';
+import '../models/booking.dart';
+import 'rules_screen.dart';
 
 const url = "https://download1519.mediafire.com/yrb14z8r6gxg/1j4aifyjljd3pwt/covid-Wedding.pdf";
 
@@ -37,17 +39,25 @@ Widget buildImage(String image) {
     );
   }
 
-  void rulesAndRegualtions(BuildContext context){
-    //TODO: write code for rules and regulations
-    Navigator.of(context).push(MaterialPageRoute(
+  void rulesAndRegualtions(BuildContext ctx){
+    Navigator.of(ctx).push(MaterialPageRoute(
       builder: (_){
         return RuleScreen();
       }
     ));
   }
 
-  void launchURL() async =>
+  void dcPermissionLetter() async{
     await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+  }
+
+  void popUp(BuildContext ctx){
+    showModalBottomSheet(
+      context: ctx, 
+      builder: (_){
+        return Booking();
+    });
+    }
 
  @override
   Widget build(BuildContext context) {
@@ -175,7 +185,7 @@ Widget buildImage(String image) {
                       Icon(Icons.arrow_downward_rounded,size:25,color:Colors.blue),
                       SizedBox(width:5),
                       GestureDetector(
-                        onTap: launchURL,
+                        onTap: dcPermissionLetter,
                         child: Text("Download DC Permission Letter" ,style: hall_read_more_link),
                       ),
                     ],
@@ -280,7 +290,7 @@ Widget buildImage(String image) {
 
                 Center(
                   child: GestureDetector(
-                    onTap: (){},
+                    onTap: () => popUp(context),
                     child: Container(
                       padding:EdgeInsets.symmetric(horizontal:30,vertical:10),
                       margin: EdgeInsets.only(top:20),
