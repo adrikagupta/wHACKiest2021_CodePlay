@@ -496,6 +496,7 @@ startDatePicker(BuildContext context){
                               int mins = ((diffx)*60).ceil();
                               print(mins);
                               DateTime initial = startDate;
+                              intervals.add(startDate);
                               for(int i=0; i<a; i++){
                                 DateTime temp = initial.add(Duration(hours: hours, minutes: mins));
                                 intervals.add(temp);
@@ -512,93 +513,130 @@ startDatePicker(BuildContext context){
                               context: context,
                               builder: (context) => Scaffold(
                                 appBar: AppBar(
-                                  title: Text("Your invitation"),
+                                  title: Text("Your invitation",textAlign: TextAlign.center,
+                                               style:  GoogleFonts.getFont( 'Acme',
+                                                textStyle:TextStyle(
+                                                  color:currentColor ,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 25,
+                                                
+                                                )),
+                                  ),
                                   backgroundColor: Color(0xFFFDF2E9 ),
                                 ),
                                 body: Center(
-                                    child: Column(
-                                  children: [
-                                    _imageFile != null ? Image.memory(_imageFile) : Container(),
-                                    noof>50? Container(
-                                      height: 300.0,
-                                      child: ListView.builder
-                                        (
-                                          physics: NeverScrollableScrollPhysics(),
-                                          itemCount: intervals.length,
-                                          itemBuilder: (BuildContext ctxt, int index) {
-                                          return Text(intervals[index].toLocal().toString() + '50 poeple',
+                                      child: SingleChildScrollView(
+                                      child: Column(
+                                    children: [
+                                      Text('Number of shifts:',
+                                      style:  GoogleFonts.getFont( 'Acme',
+                                                textStyle:TextStyle(
+                                                  color:currentColor ,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 22,
+                                                
+                                                )),
+                                      ),
+                                      noof>50? Container(
+                                        height: 150.0,
+                                        color: Color(0xFFFDF2E9 ),
+                                        child: ListView.builder
+                                          (
+                                            physics: NeverScrollableScrollPhysics(),
+                                            itemCount: intervals.length -1 ,
+                                            itemBuilder: (BuildContext ctxt, int index) {
+                                            return Text( intervals[index].toLocal().toString() +' to '+intervals[index+1].toLocal().toString(),
+                                              textAlign: TextAlign.center,
+                                               style:  GoogleFonts.getFont( 'Acme',
+                                                textStyle:TextStyle(
+                                                  color:currentColor ,
+                                                  fontWeight: FontWeight.w300,
+                                                  fontSize: 16,
+                                                
+                                                )),
+                                            );
+                                            }
+                                          ),
+                                      )
+                                      :Container(),
+                                      
+                                      _imageFile != null ? Image.memory(_imageFile) : Container(),
+                                      Row(
+                                        children: [
+                                          Text('Not satisfied?',
                                             textAlign: TextAlign.center,
-                                             style:  GoogleFonts.getFont( 'Acme',
-                                              textStyle:TextStyle(
-                                                color:currentColor ,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 25,
-                                              
-                                              )),
-                                          );
-                                          }
-                                        ),
-                                    )
-                                    :Container(),
-                                    Row(
-                                      children: [
-                                        Text('Not satisfied?',
-                                          textAlign: TextAlign.center,
-                                             style:  GoogleFonts.getFont( 'Acme',
-                                              textStyle:TextStyle(
-                                                color:currentColor ,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 25,
-                                              
-                                              )),
-                                        ),
-                                        
-                                      TextButton(
-                                        child: Text('Continue editing',
-                                          textAlign: TextAlign.center,
-                                             style:  GoogleFonts.getFont( 'Acme',
-                                              textStyle:TextStyle(
-                                                color:currentColor ,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 25,
-                                              
-                                              )),
-                                        ),
-                                        onPressed: ()=> Navigator.pop(context),
-                                      )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text('Share it: ', textAlign: TextAlign.center,
-                                             style:  GoogleFonts.getFont( 'Acme',
-                                              textStyle:TextStyle(
-                                                color:currentColor ,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 25,
-                                              
-                                              )),),
-                                        
-                                      IconButton(
-                                        icon: Icon(Icons.share),
-                                        onPressed: () async {
-                                          // Share.shareFiles([_imageFile], text: 'You');
-                                          // await Share.file('esys image', 'esys.png', _imageFile , 'image/png');
-                                          String dir = (await getApplicationDocumentsDirectory()).path;
-                                          String fullPath = '$dir/def.png';
-                                          print("local file full path $fullPath");
-                                          File file = File(fullPath);
-                                          await file.writeAsBytes(_imageFile);
-                                          print(file.path);
-                                          final result = await ImageGallerySaver.saveImage(_imageFile);
-                                          print(result);
-                                          Share.shareFiles([file.path], text: 'You are invited!');
-                                        },
-                                      )
-                                      ],
-                                    ),
-                                  ],
-                                )),
+                                               style:  GoogleFonts.getFont( 'Acme',
+                                                textStyle:TextStyle(
+                                                  color:currentColor ,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 25,
+                                                
+                                                )),
+                                          ),
+                                          
+                                         ElevatedButton(
+                style:  ElevatedButton.styleFrom(
+                    onPrimary: Colors.black87,
+                    primary: Color(0xFFFDF2E9 ),
+                    minimumSize: Size(20, 46),
+                    padding: EdgeInsets.symmetric(horizontal: 3),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                  ),
+                                          child: Text('Continue editing',
+                                            textAlign: TextAlign.center,
+                                               style:  GoogleFonts.getFont( 'Acme',
+                                                textStyle:TextStyle(
+                                                  color:currentColor ,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 25,
+                                                
+                                                )),
+                                          ),
+                                          onPressed: (){
+                                            Navigator.pop(context);
+                                            intervals = [];
+                                            },
+                                        )
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text('Share it: ', textAlign: TextAlign.center,
+                                               style:  GoogleFonts.getFont( 'Acme',
+                                                textStyle:TextStyle(
+                                                  color:currentColor ,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 25,
+                                                
+                                                )),),
+                                          
+                                        CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Color(0xFFFDF2E9 ),
+                              child: IconButton(
+                                color: Colors.black,
+                                          icon: Icon(Icons.share),
+                                          onPressed: () async {
+                                            // Share.shareFiles([_imageFile], text: 'You');
+                                            // await Share.file('esys image', 'esys.png', _imageFile , 'image/png');
+                                            String dir = (await getApplicationDocumentsDirectory()).path;
+                                            String fullPath = '$dir/def.png';
+                                            print("local file full path $fullPath");
+                                            File file = File(fullPath);
+                                            await file.writeAsBytes(_imageFile);
+                                            print(file.path);
+                                            final result = await ImageGallerySaver.saveImage(_imageFile);
+                                            print(result);
+                                            Share.shareFiles([file.path], text: 'You are invited!');
+                                          },
+                                        ))
+                                        ],
+                                      ),
+                                    ],
+                                  )),
+                                ),
                               ),
                             );
                           }).catchError((onError) {

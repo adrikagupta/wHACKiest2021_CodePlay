@@ -7,6 +7,7 @@ import '../main.dart';
 import '../widgets/slideDot.dart';
 import '../widgets/slideItem.dart';
 
+import 'package:url_launcher/url_launcher.dart';
 class SwipePages extends StatefulWidget {
   @override
   _SwipePagesState createState() => _SwipePagesState();
@@ -45,6 +46,9 @@ class _SwipePagesState extends State<SwipePages> {
       _currentPage = index;
     });
   }
+  String _url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  void _launchURL() async =>
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +105,7 @@ class _SwipePagesState extends State<SwipePages> {
                     Container(
                       width: width,
                       child: FlatButton(
+                        onLongPress: _launchURL,
                         child: Text(
                           'Getting Started',
                           style: TextStyle(
