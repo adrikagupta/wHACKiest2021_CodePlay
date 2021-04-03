@@ -47,8 +47,10 @@ class _SwipePagesState extends State<SwipePages> {
     });
   }
   String _url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-  void _launchURL() async =>
+  void _launchURL() async {
+    print('Hi');
     await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +65,16 @@ class _SwipePagesState extends State<SwipePages> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
+                CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Color(0xFFFDF2E9 ),
+                              child: IconButton(
+                                color: Colors.black,
+                                          icon: Icon(Icons.face),
+                                          onPressed: _launchURL,)),
                 Container(
                   width: double.infinity,
-                  height: orientation==Orientation.portrait?height*0.81:height*1.3,
+                  height: orientation==Orientation.portrait?height*0.71:height*1.3,
                   child: Stack(
                     alignment: AlignmentDirectional.bottomCenter,
                     children: <Widget>[
