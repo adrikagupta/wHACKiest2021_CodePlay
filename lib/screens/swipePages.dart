@@ -6,7 +6,7 @@ import '../models/slide.dart';
 import '../main.dart';
 import '../widgets/slideDot.dart';
 import '../widgets/slideItem.dart';
-
+import 'hall_main_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 class SwipePages extends StatefulWidget {
   @override
@@ -65,13 +65,13 @@ class _SwipePagesState extends State<SwipePages> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
-                CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Color(0xFFFDF2E9 ),
-                              child: IconButton(
-                                color: Colors.black,
-                                          icon: Icon(Icons.face),
-                                          onPressed: _launchURL,)),
+                // CircleAvatar(
+                //               radius: 30,
+                //               backgroundColor: Color(0xFFFDF2E9 ),
+                //               child: IconButton(
+                //                 color: Colors.black,
+                //                           icon: Icon(Icons.face),
+                //                           onPressed: _launchURL,)),
                 Container(
                   width: double.infinity,
                   height: orientation==Orientation.portrait?height*0.71:height*1.3,
@@ -128,7 +128,7 @@ class _SwipePagesState extends State<SwipePages> {
                         color: Color.fromRGBO(56, 173, 169,1.0),
                         textColor: Colors.white,
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>HallMainPage()));
                         } 
                       ),
                     )

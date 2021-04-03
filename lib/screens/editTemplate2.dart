@@ -325,10 +325,6 @@ startDatePicker(BuildContext context){
                             },
                             decoration: InputDecoration(
                              labelText: 'Enter Title',
-                            //  labelStyle: TextStyle(
-                            //    color: Colors.pink
-                            //  ),
-                            //  prefixIcon: Icon(Icons.date_range_rounded),
                              border: OutlineInputBorder(
                                borderRadius: BorderRadius.circular(20.0)
                              )
@@ -346,10 +342,6 @@ startDatePicker(BuildContext context){
                         },
                         decoration: InputDecoration(
                          labelText: 'Enter Description',
-                        //  labelStyle: TextStyle(
-                        //    color: Colors.pink
-                        //  ),
-                        //  prefixIcon: Icon(Icons.),
                          border: OutlineInputBorder(
                            borderRadius: BorderRadius.circular(20.0)
                          )
@@ -366,9 +358,6 @@ startDatePicker(BuildContext context){
                         },
                         decoration: InputDecoration(
                          labelText: 'Enter Venue',
-                        //  labelStyle: TextStyle(
-                        //    color: Colors.pink
-                        //  ),
                          prefixIcon: Icon(Icons.location_on),
                          border: OutlineInputBorder(
                            borderRadius: BorderRadius.circular(20.0)
@@ -528,7 +517,7 @@ startDatePicker(BuildContext context){
                                       child: SingleChildScrollView(
                                       child: Column(
                                     children: [
-                                      Text('Number of shifts:',
+                                      noof>50? Text('Number of shifts:',
                                       style:  GoogleFonts.getFont( 'Acme',
                                                 textStyle:TextStyle(
                                                   color:currentColor ,
@@ -536,7 +525,7 @@ startDatePicker(BuildContext context){
                                                   fontSize: 22,
                                                 
                                                 )),
-                                      ),
+                                      ):Container(),
                                       noof>50? Container(
                                         height: 150.0,
                                         color: Color(0xFFFDF2E9 ),

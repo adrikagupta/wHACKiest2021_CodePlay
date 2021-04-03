@@ -1,6 +1,7 @@
 import 'package:book_my_hall/screens/catering_main_page.dart';
 import 'package:book_my_hall/screens/hall_list.dart';
 import 'package:flutter/material.dart';
+import 'invitscreen.dart';
 
 class HallMainPage extends StatelessWidget {
   TextEditingController cityController = new TextEditingController();
@@ -13,7 +14,10 @@ class HallMainPage extends StatelessWidget {
         context, MaterialPageRoute(builder: (context) => CateringMainPage()));
   }
 
-  void goToInvitationPage(BuildContext context) {}
+  void goToInvitationPage(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DashboardPage()));
+  }
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

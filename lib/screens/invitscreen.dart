@@ -17,35 +17,37 @@ class _DashboardPageState extends State<DashboardPage> {
           children: <Widget>[
             SizedBox(height: 30.0),
             Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                            child: Container(
+                            // padding: EdgeInsets.all(5.0),
+                            height: 40.0,
+                            width: 40.0,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(7.0),
+                                color: Color(0xFFFD4F99)),
+                            child: IconButton(
+                              icon: Icon(Icons.arrow_back_ios), color: Colors.white,
+                              onPressed: ()=> Navigator.pop(context),
+                            )),
+              ),
+            ),
+            Padding(
                 padding: EdgeInsets.all(15.0),
                 child: 
+
                 // Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: <Widget>[
-            //         Container(
-            //             height: 40.0,
-            //             width: 40.0,
-            //             decoration: BoxDecoration(
-            //                 borderRadius: BorderRadius.circular(7.0),
-            //                 color: Color(0xFFFD4F99)),
-            //             child: Center(
-            //                 child: Icon(Icons.filter_list, color: Colors.white))),
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                    
                     Text('Create an Invitation Card',
                         style: GoogleFonts.montserrat(
                             fontSize: 36.0,
                             fontWeight: FontWeight.w400,
                             textStyle: TextStyle(color: Colors.white))),
-            //         Container(
-            //           height: 40.0,
-            //           width: 40.0,
-            //           decoration: BoxDecoration(
-            //               borderRadius: BorderRadius.circular(7.0),
-            //               color: Color(0xFF353535)),
-            //           child: Center(
-            //             child: Icon(Icons.bookmark_border, color: Colors.white),
-            //           ),
-            //         )
-            //       ],
+            
+                //   ],
                 // )
                 ),
             SizedBox(height: 10.0),

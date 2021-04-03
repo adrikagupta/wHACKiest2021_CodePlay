@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             child:Center(
-              child: Text("BookMyHall",
+              child: Text("WedZilla",
               style: TextStyle(fontFamily: "Merienda", fontSize: 35,fontWeight: FontWeight.bold),
             ))
              ), 
