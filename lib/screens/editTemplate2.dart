@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'dart:typed_data';
 import 'package:screenshot/screenshot.dart';
@@ -30,13 +32,42 @@ class _EditTemplate2State extends State<EditTemplate2> {
   String desc = "";
   String date = "";
   String fam = "Acme";
-
+  String noofpep = "";
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
+  List<DateTime> intervals =[];
   Color pickerColor = Color(0xff443a49);
   Color currentColor = Color(0xff443a49);
   void changeColor(Color color) {
     setState(() => pickerColor = color);
   }
 
+startDatePicker(BuildContext context){
+    DatePicker.showDateTimePicker(
+      context,
+      showTitleActions: true, 
+      minTime: DateTime(2020, 1, 1),
+      maxTime: DateTime(2025, 12, 31),
+      onConfirm: (date) {
+        setState(() {
+        startDate = date;
+        });
+      },
+      );
+  }
+  endDatePicker(BuildContext context){
+    DatePicker.showDateTimePicker(
+      context,
+      showTitleActions: true, 
+      minTime: DateTime(2020, 1, 1),
+      maxTime: DateTime(2025, 12, 31),
+      onConfirm: (date) {
+        setState(() {
+        endDate = date;
+        });
+      },
+      );
+  }
 
     @override
   Widget build(BuildContext context) {
@@ -347,18 +378,78 @@ class _EditTemplate2State extends State<EditTemplate2> {
                 SizedBox(
                         height: 12,
                 ),
+                 Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text(startDate.toLocal().toString().split(' ')[0]),
+                    SizedBox(height: 20.0,),
+                    ElevatedButton(
+                style:  ElevatedButton.styleFrom(
+                    onPrimary: Colors.black87,
+                    primary: Color(0xFFFDF2E9 ),
+                    minimumSize: Size(60, 46),
+                    padding: EdgeInsets.symmetric(horizontal: 46),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                  ),
+                      onPressed: () { 
+                        startDatePicker(context);
+                        setState((){
+                          date = startDate.toLocal().toString().split(' ')[0];
+                        });
+                      },
+                      child: Text('Select Start date'),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                        height: 12,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text(endDate.toLocal().toString().split(' ')[0]),
+                    SizedBox(height: 20.0,),
+                    ElevatedButton(
+                      style:  ElevatedButton.styleFrom(
+                          onPrimary: Colors.black87,
+                          primary: Color(0xFFFDF2E9 ),
+                          minimumSize: Size(60, 46),
+                          padding: EdgeInsets.symmetric(horizontal: 46),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                          ),
+                        ),
+                      onPressed: () => endDatePicker(context),
+                      child: Text('Select End date'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+                SizedBox(
+                        height: 12,
+                ),
                 TextField(
                         onChanged: (val) {
                          setState(() {
-                          date = val;
+                          noofpep = val;
                           });
                         },
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration: InputDecoration(
-                         labelText: 'Enter Date and Time',
+                         labelText: 'Enter Number of people attending',
                         //  labelStyle: TextStyle(
                         //    color: Colors.pink
                         //  ),
-                         prefixIcon: Icon(Icons.date_range_rounded),
+                         prefixIcon: Icon(Icons.people),
                          border: OutlineInputBorder(
                            borderRadius: BorderRadius.circular(20.0)
                          )
@@ -382,6 +473,36 @@ class _EditTemplate2State extends State<EditTemplate2> {
                   ),
                       child: Text('Generate'),
                       onPressed: (){
+                        if(noofpep==""){
+                            showDialog(
+                              context: context,
+                              builder:(BuildContext context) {
+                                  return AlertDialog(
+                                title: const Text('Please enter the number of people attending'),
+                                content: Text(''));
+                                }
+                              );
+                        }
+                        else{
+                          int noof = int.parse(noofpep);
+                            if(noof>50){
+                              int diff = endDate.difference(startDate).inHours;
+                              int a = (noof/50).ceil();
+                              print(diff);
+                              print(a);
+                              int hours = (diff/a).floor();
+                              print(hours);
+                              var diffx = (diff/a) - hours;
+                              int mins = ((diffx)*60).ceil();
+                              print(mins);
+                              DateTime initial = startDate;
+                              for(int i=0; i<a; i++){
+                                DateTime temp = initial.add(Duration(hours: hours, minutes: mins));
+                                intervals.add(temp);
+                                initial = temp;
+                              }
+                              print(intervals);
+                            }
                           _imageFile = null;
                           screenshotController
                               .capture(delay: Duration(milliseconds: 10))
@@ -392,24 +513,71 @@ class _EditTemplate2State extends State<EditTemplate2> {
                               builder: (context) => Scaffold(
                                 appBar: AppBar(
                                   title: Text("Your invitation"),
+                                  backgroundColor: Color(0xFFFDF2E9 ),
                                 ),
                                 body: Center(
                                     child: Column(
                                   children: [
                                     _imageFile != null ? Image.memory(_imageFile) : Container(),
+                                    noof>50? Container(
+                                      height: 300.0,
+                                      child: ListView.builder
+                                        (
+                                          physics: NeverScrollableScrollPhysics(),
+                                          itemCount: intervals.length,
+                                          itemBuilder: (BuildContext ctxt, int index) {
+                                          return Text(intervals[index].toLocal().toString() + '50 poeple',
+                                            textAlign: TextAlign.center,
+                                             style:  GoogleFonts.getFont( 'Acme',
+                                              textStyle:TextStyle(
+                                                color:currentColor ,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 25,
+                                              
+                                              )),
+                                          );
+                                          }
+                                        ),
+                                    )
+                                    :Container(),
                                     Row(
                                       children: [
-                                        Text('Not satisfied?'),
+                                        Text('Not satisfied?',
+                                          textAlign: TextAlign.center,
+                                             style:  GoogleFonts.getFont( 'Acme',
+                                              textStyle:TextStyle(
+                                                color:currentColor ,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 25,
+                                              
+                                              )),
+                                        ),
                                         
                                       TextButton(
-                                        child: Text('Continue editing'),
+                                        child: Text('Continue editing',
+                                          textAlign: TextAlign.center,
+                                             style:  GoogleFonts.getFont( 'Acme',
+                                              textStyle:TextStyle(
+                                                color:currentColor ,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 25,
+                                              
+                                              )),
+                                        ),
                                         onPressed: ()=> Navigator.pop(context),
                                       )
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        Text('Share it: '),
+                                        Text('Share it: ', textAlign: TextAlign.center,
+                                             style:  GoogleFonts.getFont( 'Acme',
+                                              textStyle:TextStyle(
+                                                color:currentColor ,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 25,
+                                              
+                                              )),),
                                         
                                       IconButton(
                                         icon: Icon(Icons.share),
@@ -417,7 +585,7 @@ class _EditTemplate2State extends State<EditTemplate2> {
                                           // Share.shareFiles([_imageFile], text: 'You');
                                           // await Share.file('esys image', 'esys.png', _imageFile , 'image/png');
                                           String dir = (await getApplicationDocumentsDirectory()).path;
-                                          String fullPath = '$dir/abc.png';
+                                          String fullPath = '$dir/def.png';
                                           print("local file full path $fullPath");
                                           File file = File(fullPath);
                                           await file.writeAsBytes(_imageFile);
@@ -435,7 +603,7 @@ class _EditTemplate2State extends State<EditTemplate2> {
                             );
                           }).catchError((onError) {
                             print(onError);
-                          });
+                          });}
                         },
               ),
               SizedBox(
