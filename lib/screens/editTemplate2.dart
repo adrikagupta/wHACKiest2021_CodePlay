@@ -1,10 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'dart:typed_data';
 import 'package:screenshot/screenshot.dart';
 // import 'package:image_picker/image_picker.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:share/share.dart';
 import '../widgets/iconCard.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:share/share.dart';
+// import 'package:esys_flutter_share/esys_flutter_share.dart';
+
+import 'package:path_provider/path_provider.dart';
 
 class EditTemplate2 extends StatefulWidget {
   const EditTemplate2(this.image);
@@ -36,6 +44,7 @@ class _EditTemplate2State extends State<EditTemplate2> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
           child: Scaffold(
+            backgroundColor: Color(0xFFF8F9F9),
         body: 
         SingleChildScrollView(
                 child: 
@@ -55,13 +64,19 @@ class _EditTemplate2State extends State<EditTemplate2> {
                         children: <Widget>[
                           Align(
                             alignment: Alignment.topLeft,
-                            child: IconButton(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 10.0),
-                              icon: Icon(Icons.arrow_back_ios),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
+                            
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Color(0xFFFDF2E9 ),
+                              child: IconButton(
+                                color: Colors.black,
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 10.0),
+                                icon: Icon(Icons.arrow_back_ios),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
                             ),
                           ),
                           // Spacer(),
@@ -97,7 +112,7 @@ class _EditTemplate2State extends State<EditTemplate2> {
                           }
                           ),
                            GestureDetector(child: IconCard(icon: Icons.font_download),
-                           //onTap: //TODO: add font function
+                           onTap: ()=>_showDialog(context)
                            )
                         ],
                       // ),
@@ -130,7 +145,7 @@ class _EditTemplate2State extends State<EditTemplate2> {
                                               textStyle:TextStyle(
                                                 color:currentColor ,
                                                 fontWeight: FontWeight.w700,
-                                                fontSize: 26,
+                                                fontSize: 27,
                                               
                                               ),
                                           
@@ -148,8 +163,8 @@ class _EditTemplate2State extends State<EditTemplate2> {
                                              style:  GoogleFonts.getFont( fam,
                                               textStyle:TextStyle(
                                                 color:currentColor ,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 26,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 22
                                               
                                               ),
                                           
@@ -167,8 +182,8 @@ class _EditTemplate2State extends State<EditTemplate2> {
                                              style:  GoogleFonts.getFont( fam,
                                               textStyle:TextStyle(
                                                 color:currentColor ,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 26,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 22,
                                               
                                               ),
                                           
@@ -186,8 +201,8 @@ class _EditTemplate2State extends State<EditTemplate2> {
                                             style:  GoogleFonts.getFont( fam,
                                               textStyle:TextStyle(
                                                 color:currentColor ,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 26,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 22,
                                               
                                               ),
                                           
@@ -355,7 +370,16 @@ class _EditTemplate2State extends State<EditTemplate2> {
                   ],
                 ),
               ),
-              TextButton(
+              ElevatedButton(
+                style:  ElevatedButton.styleFrom(
+                    onPrimary: Colors.black87,
+                    primary: Color(0xFFFDF2E9 ),
+                    minimumSize: Size(120, 46),
+                    padding: EdgeInsets.symmetric(horizontal: 46),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                  ),
                       child: Text('Generate'),
                       onPressed: (){
                           _imageFile = null;
@@ -367,12 +391,44 @@ class _EditTemplate2State extends State<EditTemplate2> {
                               context: context,
                               builder: (context) => Scaffold(
                                 appBar: AppBar(
-                                  title: Text("CAPURED SCREENSHOT"),
+                                  title: Text("Your invitation"),
                                 ),
                                 body: Center(
                                     child: Column(
                                   children: [
                                     _imageFile != null ? Image.memory(_imageFile) : Container(),
+                                    Row(
+                                      children: [
+                                        Text('Not satisfied?'),
+                                        
+                                      TextButton(
+                                        child: Text('Continue editing'),
+                                        onPressed: ()=> Navigator.pop(context),
+                                      )
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text('Share it: '),
+                                        
+                                      IconButton(
+                                        icon: Icon(Icons.share),
+                                        onPressed: () async {
+                                          // Share.shareFiles([_imageFile], text: 'You');
+                                          // await Share.file('esys image', 'esys.png', _imageFile , 'image/png');
+                                          String dir = (await getApplicationDocumentsDirectory()).path;
+                                          String fullPath = '$dir/abc.png';
+                                          print("local file full path $fullPath");
+                                          File file = File(fullPath);
+                                          await file.writeAsBytes(_imageFile);
+                                          print(file.path);
+                                          final result = await ImageGallerySaver.saveImage(_imageFile);
+                                          print(result);
+                                          Share.shareFiles([file.path], text: 'You are invited!');
+                                        },
+                                      )
+                                      ],
+                                    ),
                                   ],
                                 )),
                               ),
@@ -381,7 +437,10 @@ class _EditTemplate2State extends State<EditTemplate2> {
                             print(onError);
                           });
                         },
-              )
+              ),
+              SizedBox(
+                        height: 32,
+                ),
           
                       ]
             // ),
@@ -392,4 +451,42 @@ class _EditTemplate2State extends State<EditTemplate2> {
     
     }
 
-}
+
+
+Future _showDialog(context) async {
+ return await showDialog<void>(
+   context: context,
+   builder: (BuildContext context) {
+     return AlertDialog(
+       content: StatefulBuilder(
+         builder: (BuildContext context, StateSetter setState) {
+           return Column(
+             mainAxisSize: MainAxisSize.min,
+             children: <Widget>[
+               Text('Choose your font style:'),
+                DropdownButton<String>(
+                        
+                          hint: Text('Choose font style'), 
+                           value: fam,
+                          items: <String>['Acme', 'Faustina', 'Dancing Script', 'Lobster', 'Great Vibes','Architects Daughter'].map((String value) {
+                            return new DropdownMenuItem<String>(
+                              value: value,
+                              child: new Text(value,
+                                style:  GoogleFonts.getFont(value)
+                              ),
+                              
+                            );
+                          }).toList(),
+                          onChanged: (String f) {
+                            setState((){
+                              fam = f;
+                            });
+                            print(fam);
+                          },)
+             ]);
+             }
+           ));
+         },
+       
+ );
+}}

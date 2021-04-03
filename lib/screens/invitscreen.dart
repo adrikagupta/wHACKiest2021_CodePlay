@@ -15,7 +15,7 @@ class _DashboardPageState extends State<DashboardPage> {
           body: SingleChildScrollView(
             child: Column(
           children: <Widget>[
-            SizedBox(height: 20.0),
+            SizedBox(height: 30.0),
             Padding(
                 padding: EdgeInsets.all(15.0),
                 child: 
@@ -32,7 +32,7 @@ class _DashboardPageState extends State<DashboardPage> {
             //                 child: Icon(Icons.filter_list, color: Colors.white))),
                     Text('Create an Invitation Card',
                         style: GoogleFonts.montserrat(
-                            fontSize: 16.0,
+                            fontSize: 36.0,
                             fontWeight: FontWeight.w400,
                             textStyle: TextStyle(color: Colors.white))),
             //         Container(
@@ -116,9 +116,9 @@ class _DashboardPageState extends State<DashboardPage> {
                             width: 125.0,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.white),
+                                color: Colors.white.withOpacity(0.8)),
                             child: Center(
-                                child: Text('Explore now',
+                                child: Text('Create template',
                                     style: GoogleFonts.montserrat(
                                         fontSize: 12.0,
                                         fontWeight: FontWeight.bold,

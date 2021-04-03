@@ -17,7 +17,7 @@ class IconCard extends StatelessWidget {
       height: 62,
       width: 62,
       decoration: BoxDecoration(
-        color: Colors.brown[100],
+        color: Color(0xFFFDF2E9 ),
         borderRadius: BorderRadius.circular(50.0),
         boxShadow: [
           BoxShadow(
