@@ -19,3 +19,4 @@ var caterer_read_more_content_black =  GoogleFonts.comfortaa(textStyle: TextStyl
 var caterer_read_more_title_tiny = GoogleFonts.amaticaSc(textStyle: TextStyle(color: Colors.black, fontSize: 30));
 // ignore: non_constant_identifier_names
 var caterer_read_more_content_black_tiny =  GoogleFonts.comfortaa(textStyle: TextStyle(color: Colors.black, fontSize: 13));
+var hall_read_more_link = GoogleFonts.comfortaa(textStyle: TextStyle(color: Colors.blue, fontSize: 15, decoration: TextDecoration.underline));
