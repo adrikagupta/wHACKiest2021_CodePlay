@@ -1,5 +1,6 @@
 import 'package:book_my_hall/screens/catering_main_page.dart';
 import 'package:book_my_hall/screens/hall_list.dart';
+import 'package:book_my_hall/screens/invitscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'invitscreen.dart';
@@ -7,7 +8,7 @@ import 'invitscreen.dart';
 class HallMainPage extends StatelessWidget {
   TextEditingController cityController = new TextEditingController();
   void searchByCity(BuildContext context) {
-    Navigator.of(context).push(createRoute());
+    Navigator.of(context).push(createRoute(cityController.text));
   }
 
   void goToCatererMainPage(BuildContext context) {
@@ -16,7 +17,7 @@ class HallMainPage extends StatelessWidget {
   }
 
   void goToInvitationPage(BuildContext context) {
-    Navigator.push(
+  Navigator.push(
         context, MaterialPageRoute(builder: (context) => DashboardPage()));
   }
   String _url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
@@ -25,7 +26,9 @@ class HallMainPage extends StatelessWidget {
     await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
     }
     
-  @override
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> DashboardPage()));
+  }
+@override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -117,17 +120,17 @@ class HallMainPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)),
                               child: Row(
                                 children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: IconButton(
-                                        icon: Icon(Icons.location_searching,
-                                            color: Colors.white),
-                                        onPressed: () {
-                                          print("locator pressed");
-                                        }),
-                                  ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     borderRadius: BorderRadius.circular(15),
+                                  //   ),
+                                  //   child: IconButton(
+                                  //       icon: Icon(Icons.location_searching,
+                                  //           color: Colors.white),
+                                  //       onPressed: () {
+                                  //         print("locator pressed");
+                                  //       }),
+                                  // ),
                                   Expanded(
                                     child: Container(
                                       padding:
@@ -166,9 +169,9 @@ class HallMainPage extends StatelessWidget {
   }
 }
 
-Route createRoute() {
+Route createRoute(String text) {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => HallList(),
+    pageBuilder: (context, animation, secondaryAnimation) => HallList(text:text),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       var begin = Offset(0.0, 1.0);
       var end = Offset.zero;
