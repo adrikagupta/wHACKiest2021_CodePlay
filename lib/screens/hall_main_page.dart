@@ -61,7 +61,7 @@ class HallMainPage extends StatelessWidget {
                                     goToCatererMainPage(context);
                                   },
                                   child: Icon(Icons.food_bank_rounded,
-                                      size: 45, color: Colors.black87)),
+                                      size: 45, color: Colors.white.withOpacity(0.8))),
                             ),
                             PopupMenuItem(
                               child: GestureDetector(
@@ -69,7 +69,7 @@ class HallMainPage extends StatelessWidget {
                                     goToInvitationPage(context);
                                   },
                                   child: Icon(Icons.menu_book_rounded,
-                                      size: 42, color: Colors.black87)),
+                                      size: 42, color: Colors.white.withOpacity(0.8))),
                             )
                           ],
                         ),

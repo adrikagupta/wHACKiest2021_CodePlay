@@ -107,9 +107,6 @@ class _BookingState extends State<Booking> {
                 Center(child:Text(endDate==null?'No end date chosen':'end date: ${endDate.day}-${endDate.month}-${endDate.year}',
                 style: TextStyle(fontSize: 20))),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: const BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(100))),
-                  ),
                     onPressed: saveForm,
                     child: Text('Book now'),
                 ),
